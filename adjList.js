@@ -1,3 +1,5 @@
+//using Set for Adjacency List
+
 class Graph {
   constructor() {
     this.adjacencyList = [];
@@ -42,6 +44,21 @@ class Graph {
     return this.adjacencyList[v1].has(v2) && this.adjacencyList[v2].has(v1);
   }
 
+  getVertices() {
+    return Object.keys(this.adjacencyList);
+  }
+
+  getVerticesCount() {
+    return Object.keys(this.adjacencyList).length;
+  }
+
+  getNeighbours(v) {
+    if (!this.adjacencyList[v]) {
+      return;
+    }
+    return [...this.adjacencyList[v]];
+  }
+
   display() {
     for (let vertex in this.adjacencyList) {
       console.log(vertex, "=>", [...this.adjacencyList[vertex]]);
@@ -53,9 +70,11 @@ const graph = new Graph();
 graph.addVertex("A");
 graph.addVertex("B");
 graph.addVertex("C");
+graph.addVertex("D");
 
 graph.addEdge("A", "B");
 graph.addEdge("B", "C");
+graph.addEdge("D", "B");
 
 // graph.display();
 // console.log(graph.hasEdge("A", "C"));
@@ -64,5 +83,7 @@ graph.addEdge("A", "C");
 graph.removeEdge("A", "C");
 // graph.display();
 
-graph.removeVertex("A");
+// graph.removeVertex("A");
 graph.display();
+// console.log(graph.getVerticesCount());
+console.log(graph.getNeighbours("B"));
